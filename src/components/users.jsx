@@ -27,7 +27,7 @@ const Users = ({ users, onDelete, onToggleBookmark }) => {
   };
 
   const filteredUsers = selectedProf
-    ? users.filter((user) => user.profession === selectedProf)
+    ? users.filter((user) => user.profession._id === selectedProf._id)
     : users;
   const count = filteredUsers.length;
   const pageSize = 4;

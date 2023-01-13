@@ -2,11 +2,11 @@ import { noConflict } from "lodash";
 import React, { useEffect, useState } from "react";
 import { paginate } from "../utils/paginate";
 import Pagination from "./pagination";
-import User from "./user";
 import api from "../api";
 import PropTypes from "prop-types";
 import GroupList from "./groupList";
 import SearchStatus from "./searchStatus";
+import UsersTable from "./usersTable";
 
 const Users = ({ users, onDelete, onToggleBookmark }) => {
   const [professions, setProfessions] = useState();
@@ -31,7 +31,7 @@ const Users = ({ users, onDelete, onToggleBookmark }) => {
     : users;
   const count = filteredUsers.length;
   const pageSize = 4;
-  const userCrop = paginate(filteredUsers, currentPage, pageSize);
+  const usersCrop = paginate(filteredUsers, currentPage, pageSize);
 
   const clearFilter = () => {
     setSelectedProf();
@@ -56,29 +56,11 @@ const Users = ({ users, onDelete, onToggleBookmark }) => {
       <div className="d-flex flex-column">
         <SearchStatus length={count} />
         {count > 0 && (
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">Имя</th>
-                <th scope="col">Качества</th>
-                <th scope="col">Профессия</th>
-                <th scope="col">Встретился, раз</th>
-                <th scope="col">Оценка</th>
-                <th scope="col">Избранное</th>
-                <th />
-              </tr>
-            </thead>
-            <tbody>
-              {userCrop.map((user) => (
-                <User
-                  key={user._id}
-                  user={user}
-                  onDelete={onDelete}
-                  onToggleBookmark={onToggleBookmark}
-                />
-              ))}
-            </tbody>
-          </table>
+          <UsersTable
+            users={usersCrop}
+            onDelete={onDelete}
+            onToggleBookmark={onToggleBookmark}
+          />
         )}
         <div className="d-flex justify-content-center">
           <Pagination

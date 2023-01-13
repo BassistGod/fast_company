@@ -1,5 +1,6 @@
-import { noConflict } from "lodash";
+import { isSymbol, noConflict } from "lodash";
 import React, { useEffect, useState } from "react";
+import _ from "lodash";
 import { paginate } from "../utils/paginate";
 import Pagination from "./pagination";
 import api from "../api";
@@ -12,6 +13,7 @@ const Users = ({ users, onDelete, onToggleBookmark }) => {
   const [professions, setProfessions] = useState();
   const [selectedProf, setSelectedProf] = useState();
   const [currentPage, setCurrentPage] = useState(1);
+  const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
 
   useEffect(() => {
     api.professions.fetchAll().then((data) => setProfessions(data));
@@ -26,12 +28,20 @@ const Users = ({ users, onDelete, onToggleBookmark }) => {
     setCurrentPage(1);
   };
 
+  const handleSort = (item) => {
+    setSortBy(item);
+  };
+
   const filteredUsers = selectedProf
     ? users.filter((user) => user.profession._id === selectedProf._id)
     : users;
+
   const count = filteredUsers.length;
-  const pageSize = 4;
-  const usersCrop = paginate(filteredUsers, currentPage, pageSize);
+
+  const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
+
+  const pageSize = 8;
+  const usersCrop = paginate(sortedUsers, currentPage, pageSize);
 
   const clearFilter = () => {
     setSelectedProf();
@@ -60,6 +70,8 @@ const Users = ({ users, onDelete, onToggleBookmark }) => {
             users={usersCrop}
             onDelete={onDelete}
             onToggleBookmark={onToggleBookmark}
+            onSort={handleSort}
+            currentSort={sortBy}
           />
         )}
         <div className="d-flex justify-content-center">

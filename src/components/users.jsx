@@ -71,7 +71,7 @@ const Users = ({ users, onDelete, onToggleBookmark }) => {
             onDelete={onDelete}
             onToggleBookmark={onToggleBookmark}
             onSort={handleSort}
-            currentSort={sortBy}
+            selectedSort={sortBy}
           />
         )}
         <div className="d-flex justify-content-center">

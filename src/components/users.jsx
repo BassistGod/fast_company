@@ -38,7 +38,7 @@ const Users = ({ users, onDelete, onToggleBookmark }) => {
 
   const count = filteredUsers.length;
 
-  const sortedUsers = _.orderBy(filteredUsers, [sortBy.iter], [sortBy.order]);
+  const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
 
   const pageSize = 8;
   const usersCrop = paginate(sortedUsers, currentPage, pageSize);

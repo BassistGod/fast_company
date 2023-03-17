@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const UsersTableHeader = ({ onSort, selectedSort, columns }) => {
+const TableHeader = ({ onSort, selectedSort, columns }) => {
   const handleSort = (item) => {
-    if (selectedSort.iter === item) {
+    if (selectedSort.path === item) {
       onSort({
         ...selectedSort,
         order: selectedSort.order === "asc" ? "desc" : "asc",
       });
     } else {
-      onSort({ iter: item, order: "asc" });
+      onSort({ path: item, order: "asc" });
     }
   };
 
@@ -20,11 +20,11 @@ const UsersTableHeader = ({ onSort, selectedSort, columns }) => {
           <th
             key={column}
             onClick={
-              columns[column].iter
-                ? () => handleSort(columns[column].iter)
+              columns[column].path
+                ? () => handleSort(columns[column].path)
                 : undefined
             }
-            {...{ role: columns[column].iter && "button" }}
+            {...{ role: columns[column].path && "button" }}
             scope="col"
           >
             {columns[column].name}
@@ -35,10 +35,10 @@ const UsersTableHeader = ({ onSort, selectedSort, columns }) => {
   );
 };
 
-UsersTableHeader.protoTypes = {
+TableHeader.protoTypes = {
   onSort: PropTypes.func.isRequired,
   selectedSort: PropTypes.object.isRequired,
   columns: PropTypes.object.isRequired,
 };
 
-export default UsersTableHeader;
+export default TableHeader;

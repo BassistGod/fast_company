@@ -13,7 +13,7 @@ const Users = ({ users, onDelete, onToggleBookmark }) => {
   const [professions, setProfessions] = useState();
   const [selectedProf, setSelectedProf] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
+  const [sortBy, setSortBy] = useState({ Path: "name", order: "asc" });
 
   useEffect(() => {
     api.professions.fetchAll().then((data) => setProfessions(data));

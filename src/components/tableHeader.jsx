@@ -16,9 +16,9 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
   const handleSortCursor = (item) => {
     if (selectedSort.path === item) {
       if (selectedSort.order === "asc") {
-        return <i class="bi bi-caret-down-fill m-1"></i>;
+        return <i className="bi bi-caret-down-fill m-1"></i>;
       } else {
-        return <i class="bi bi-caret-up-fill m-1"></i>;
+        return <i className="bi bi-caret-up-fill m-1"></i>;
       }
     }
   };

@@ -4,6 +4,7 @@ import User from "./user";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
 import Bookmark from "./bookmark";
+import RenderQualities from "./renderQualities";
 
 const UsersTable = ({
   users,
@@ -15,7 +16,10 @@ const UsersTable = ({
 }) => {
   const columns = {
     name: { path: "name", name: "Имя" },
-    qualities: { name: "Качества" },
+    qualities: {
+      name: "Качества",
+      component: (user) => <RenderQualities qualities={user.qualities} />,
+    },
     profession: { path: "profession.name", name: "Профессия" },
     completedMeetings: { path: "completedMeetings", name: "Встретился, раз" },
     rate: { path: "rate", name: "Оценка" },

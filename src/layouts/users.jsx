@@ -110,10 +110,6 @@ const Users = () => {
   return "loading";
 };
 
-Users.propTypes = {
-  users: PropTypes.array.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onToggleBookmark: PropTypes.func.isRequired,
-};
+Users.propTypes = {};
 
 export default Users;
